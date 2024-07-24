@@ -11,17 +11,20 @@ router.get('/selectedtrivia', async function(req, res){
   let  numberOfQuestionsInput = req.query.numberOfQuestionsInput;
   let difficultyInput = req.query.difficultyInput;
   let categoryInput = req.query.selectCategoryInput;
-  const response = await axios.get(`https://opentdb.com/api.php?amount=${numberOfQuestionsInput}&category=${categoryInput}&difficulty=${difficultyInput}&type=multiple`);
+  let typeInput = req.query.typeInput;
+  console.log(typeInput);
+  const response = await axios.get(`https://opentdb.com/api.php?amount=${numberOfQuestionsInput}&category=${categoryInput}&difficulty=${difficultyInput}&type=${typeInput}`);
   let shuffledQuestions = [];
   for(let i=0; i<response.data.results.length;i++){
     shuffledQuestions.push({
       question: response.data.results[i].question,
+      type: response.data.results[i].type,
       correctAnswer: response.data.results[i].correct_answer,
       allAnswers: shuffleArray(response.data.results[i].incorrect_answers.concat(response.data.results[i].correct_answer))
     })
   }
   let category = translateCategory(categoryInput);
-  res.render('quiz', {questionsArray: shuffledQuestions, category:category});
+  res.render('quiz', {questionsArray: shuffledQuestions, category:category, type: typeInput});
 });
 
 function shuffleArray(array) {

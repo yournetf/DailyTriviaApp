@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .html,body{
+        html,body{
             background-color: rgb(233, 255, 151);
+            color: white;
         }
         .questionDiv{
             width: 60%;
@@ -57,7 +58,7 @@
             margin-left: 47%;
             justify-content: center;
             text-align: center;
-            background-color: rgb(255, 163, 143);
+            background-color: rgb(255, 126, 226);
             width: 60px;
             margin: auto;
             border-radius: 10rem;
@@ -69,7 +70,7 @@
     <form action="">
         <%for(let i=0;i<questionsArray.length;i++){%>
         <div class="questionDiv">
-            
+                
                 <h2><%=questionsArray[i].question%></h2>
                 <input type="radio" name=<%=`question${i}`%> value=<%=`${questionsArray[i].allAnswers[0]}`%>>
                 <label for=<%=`${questionsArray[i].allAnswers[0]}`%>><%=`${questionsArray[i].allAnswers[0]}`%></label>
@@ -77,12 +78,14 @@
                 <input type="radio" name=<%=`question${i}`%> value="<%=`${questionsArray[i].allAnswers[1]}`%>">
                 <label for=<%=`${questionsArray[i].allAnswers[1]}`%>><%=`${questionsArray[i].allAnswers[1]}`%></label>
                 <br>
+                <% if(questionsArray[i].type === "multiple"){ %>
                 <input type="radio" name=<%=`question${i}`%> value="<%=`${questionsArray[i].allAnswers[2]}`%>">
                 <label for=<%=`${questionsArray[i].allAnswers[2]}`%>><%=`${questionsArray[i].allAnswers[2]}`%></label>
                 <br>
                 <input type="radio" name=<%=`question${i}`%> value="<%=`${questionsArray[i].allAnswers[3]}`%>">
                 <label for=<%=`${questionsArray[i].allAnswers[3]}`%>><%=`${questionsArray[i].allAnswers[3]}`%></label>
                 <br>
+                <% } %>
                 
         </div>
         <%}%>
