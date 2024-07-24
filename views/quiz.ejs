@@ -43,15 +43,34 @@
             display: inline-block;
             visibility: visible;
             border: 2px solid rgb(0, 0, 0);
-        }   
+        }
+        .submitDiv{
+            width: 100%;
+            background-color: transparent;
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submitQuiz{
+            position: relative;
+            margin-top: 20px;
+            margin-left: 47%;
+            justify-content: center;
+            text-align: center;
+            background-color: rgb(255, 163, 143);
+            width: 60px;
+            margin: auto;
+            border-radius: 10rem;
+        }
     </style>
 </head>
 <body>
+    <h1><%=category%></h1>
     <form action="">
         <%for(let i=0;i<questionsArray.length;i++){%>
         <div class="questionDiv">
             
-                <h1><%=questionsArray[i].question%></h1>
+                <h2><%=questionsArray[i].question%></h2>
                 <input type="radio" name=<%=`question${i}`%> value=<%=`${questionsArray[i].allAnswers[0]}`%>>
                 <label for=<%=`${questionsArray[i].allAnswers[0]}`%>><%=`${questionsArray[i].allAnswers[0]}`%></label>
                 <br>
@@ -67,7 +86,10 @@
                 
         </div>
         <%}%>
-        <input type="submit">
+        <div class="submitDiv">
+            <input class="submitQuiz" type="submit">
+        </div>
+        
     </form>
 </body>
 </html>

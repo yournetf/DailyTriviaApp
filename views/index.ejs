@@ -7,6 +7,7 @@
     <style>
         .html,body{
             background-color: rgb(233, 255, 151);
+            color: white;
         }
         .selectorSection{
             width: 60%;
@@ -18,11 +19,20 @@
             justify-content: center;
             text-align: center;
         }
+        select{
+            background-color: rgb(255, 163, 143);
+            color: white;
+            border-color: white;
+            border-radius: 10rem;
+        }
         div div{
             margin-top: 20px;
         }
         input{
             background-color: rgb(255, 163, 143);
+            border-color: white;
+            border-radius: 10rem;
+            color: white;
         }
         input[type='radio']:after {
             width: 15px;
@@ -35,7 +45,7 @@
             content: '';
             display: inline-block;
             visibility: visible;
-            border: 2px solid rgb(0, 0, 0);
+            border: 2px solid rgb(255, 255, 255);
         }
         input[type='radio']:checked:after {
             width: 15px;
@@ -51,14 +61,47 @@
             border: 2px solid rgb(0, 0, 0);
         }   
         .submit{
-            background-color: rgb(255, 163, 143);
+            background-color: rgb(255, 126, 226);
             border-radius: 10rem;
+            border-color: white;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="selectorSection">
         <form action="/selectedtrivia" method="GET">
+
+            <div class="selectCategoryDiv">
+                <label for="selectCategoryInput">Choose a category:</label>
+                <select name="selectCategoryInput" id="selectCategory">
+                <option value="">Any</option>
+                <option value="9">General Knowledge</option>
+                <option value="10">Books</option>
+                <option value="11">Film</option>
+                <option value="12">Music</option>
+                <option value="13">Musical and Theaters</option>
+                <option value="14">Television</option>
+                <option value="15">Video Games</option>
+                <option value="16">Board Games</option>
+                <option value="17">Science and Nature</option>
+                <option value="18">Computers</option>
+                <option value="19">Mathematics</option>
+                <option value="20">Mythology</option>
+                <option value="21">Sports</option>
+                <option value="22">Geography</option>
+                <option value="23">History</option>
+                <option value="24">Politics</option>
+                <option value="25">Art</option>
+                <option value="26">Celebrities</option>
+                <option value="27">Animals</option>
+                <option value="28">Vehicles</option>
+                <option value="29">Comics</option>
+                <option value="30">Gadgets</option>
+                <option value="31">Anime and Manga</option>
+                <option value="32">Cartoons and Animations</option>
+                </select>
+            </div>
             
             <div class="selectNumberDiv">
                 <label for="numberOfQuestionsInput">Enter the number of questions you would like: </label>
