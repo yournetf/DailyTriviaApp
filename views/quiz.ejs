@@ -9,6 +9,11 @@
             background-color: rgb(233, 255, 151);
             color: white;
         }
+        .categoryDiv{
+            background-color: rgb(255, 163, 143);
+            text-align: center;
+            border-radius: 10rem;
+        }
         .questionDiv{
             width: 60%;
             margin-top: 20px;
@@ -30,7 +35,7 @@
             content: '';
             display: inline-block;
             visibility: visible;
-            border: 2px solid rgb(0, 0, 0);
+            border: 2px solid rgb(255, 255, 255);
         }
         input[type='radio']:checked:after {
             width: 15px;
@@ -43,7 +48,7 @@
             content: '';
             display: inline-block;
             visibility: visible;
-            border: 2px solid rgb(0, 0, 0);
+            border: 2px solid rgb(255, 255, 255);
         }
         .submitDiv{
             width: 100%;
@@ -66,7 +71,9 @@
     </style>
 </head>
 <body>
-    <h1><%=category%></h1>
+    <div class="categoryDiv">
+        <h1><%=category%></h1>
+    </div>
     <form action="">
         <%for(let i=0;i<questionsArray.length;i++){%>
         <div class="questionDiv">
