@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyTrivia</title>
+    <style>
+        .selectorSection{
+            background-color: rgb(233, 255, 151);
+        }
+    </style>
+</head>
+<body>
+    <div class="selectorSection">
+        <form action="/selectedtrivia" method="GET">
+            <label for="numberOfQuestionsInput">Enter the number of questions you would like: </label>
+            <input type="number" name="numberOfQuestionsInput" id="numberOfQuestionsInput">
+            <br>
+            <label>Select your difficulty:</label><br>
+            <input type="radio" name="difficultyInput" id="easy" value="easy">
+            <label for="easy">Easy</label>
+            <br>
+            <input type="radio" name="difficultyInput" id="medium" value="medium">
+            <label for="medium">Medium</label>
+            <br>
+            <input type="radio" name="difficultyInput" id="hard" value="hard">
+            <label for="hard">Hard</label>
+            <br>
+            <input type="radio" name="difficultyInput" id="any" value="any">
+            <label for="hard">Any</label>
+            <br>
+
+            <label>Select the type of questions:</label><br>
+            <input type="radio" name="typeInput" id="multipleChoice" value="multipleChoice">
+            <label for="multipleChoice">Multiple Choice</label>
+            <br>
+            <input type="radio" name="typeInput" id="true/false" value="true/false">
+            <label for="true/false">True/False</label>
+            <br>
+            <input type="radio" name="typeInput" id="any" value="any">
+            <label for="any">Any</label>
+            <br>
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>
