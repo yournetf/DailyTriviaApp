@@ -1,10 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-
+var fs = require("fs");
+var statsDBFilePath = "statsDB.json";
+let totalCorrect = 0;
+let totalQuestionsAnswered = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  let data = fs.readFileSync(statsDBFilePath, "utf-8");
+  let statsDB = JSON.parse(data);
+  totalCorrect = statsDB[0].totalCorrect;
+  totalQuestionsAnswered = statsDB[0].totalQuestionsAnswered;
+  res.render('index', { title: 'Express', totalCorrect: totalCorrect, totalQuestionsAnswered: totalQuestionsAnswered });
 });
 
 router.get('/selectedtrivia', async function(req, res){
@@ -12,7 +19,6 @@ router.get('/selectedtrivia', async function(req, res){
   let difficultyInput = req.query.difficultyInput;
   let categoryInput = req.query.selectCategoryInput;
   let typeInput = req.query.typeInput;
-  console.log(typeInput);
   const response = await axios.get(`https://opentdb.com/api.php?amount=${numberOfQuestionsInput}&category=${categoryInput}&difficulty=${difficultyInput}&type=${typeInput}`);
   let shuffledQuestions = [];
   for(let i=0; i<response.data.results.length;i++){
@@ -26,6 +32,45 @@ router.get('/selectedtrivia', async function(req, res){
   let category = translateCategory(categoryInput);
   res.render('quiz', {questionsArray: shuffledQuestions, category:category, type: typeInput});
 });
+
+router.get("/selectedtrivia/submit", (req, res)=>{
+  let questionsArray = req.query.questionsArray;
+  let questionsAnswers = req.query.questionsAnswers;
+  let resultsArray = [];
+  let questionsCorrect = 0;
+
+  for (let i = 0; i < questionsArray.length; i++) {
+    // Construct the property name using bracket notation
+    let propertyName = `question${i}`;
+    // Remove double quotes from questionsAnswers[i] and compare
+    if (questionsAnswers[i].replaceAll("\"", "") === req.query[propertyName]) {
+        resultsArray.push({
+          question: questionsArray[i],
+          yourAnswer: `${req.query[propertyName]}`,
+          correctAnswer: questionsAnswers[i].replaceAll("\"", ""),
+          result: `Correct`
+        });
+        questionsCorrect++;
+    }
+    else{
+      resultsArray.push({
+        question: questionsArray[i],
+        yourAnswer: `${req.query[propertyName]}`,
+        correctAnswer: questionsAnswers[i].replaceAll("\"", ""),
+        result: `Incorrect`
+      });
+    }
+}
+  let newStats = {
+    totalCorrect: questionsCorrect + totalCorrect,
+    totalQuestionsAnswered: questionsArray.length + totalQuestionsAnswered
+  }
+  let newStatsArray = []
+  newStatsArray.push(newStats);
+  
+  fs.writeFileSync(statsDBFilePath, JSON.stringify(newStatsArray, null, 2), "utf-8");
+  res.render("results", {results: resultsArray, numberCorrect: questionsCorrect});
+})
 
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {

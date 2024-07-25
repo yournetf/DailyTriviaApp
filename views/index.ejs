@@ -9,9 +9,15 @@
             background-color: rgb(233, 255, 151);
             color: white;
         }
+        .scoreHeader{
+            background-color: rgb(255, 163, 143);
+            justify-content: center;
+            text-align: center;
+            border-radius: 10rem;
+        }
         .selectorSection{
             width: 60%;
-            margin-top: 20%;
+            margin-top: -10px;
             margin-left: 20%;
             padding: 10px;
             border-radius: 10px;
@@ -66,9 +72,26 @@
             border-color: white;
             color: white;
         }
+        .passing{
+            color: greenyellow;
+        }
+        .failing{
+            color: red;
+        }
     </style>
 </head>
 <body>
+    <div class="scoreHeader">
+        <%if( (totalQuestionsAnswered ===0) || (totalCorrect/totalQuestionsAnswered)>0.5 ){%>
+            <h1>Total Score: </h1>
+            <h1 class="passing"><%=`(${totalCorrect}/${totalQuestionsAnswered})`%></h1>
+        <%}%>
+        <%if((totalCorrect/totalQuestionsAnswered)<0.5 ){%>
+            <h1>Total Score: </h1>
+            <h1 class="failing"><%=` (${totalCorrect}/${totalQuestionsAnswered})`%></h1>
+        <%}%>
+    </div>
+    
     <div class="selectorSection">
         <form action="/selectedtrivia" method="GET">
 

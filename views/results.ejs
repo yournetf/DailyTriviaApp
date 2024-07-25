@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<style>
+        html,body{
+            background-color: rgb(233, 255, 151);
+            color: white;
+        }
+        .headerDiv{
+            background-color: rgb(255, 163, 143);
+            justify-content: center;
+            text-align: center;
+            border-radius: 10rem;
+        }
+        .scoreDiv{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        .anotherQuizBtn{
+            border-radius: 10rem;
+            background-color: rgb(255, 126, 226);
+            border-color: white;
+        }
+        .anotherQuizBtn a{
+            text-decoration: none;
+            color: white;
+        }
+        .resultsDiv{
+            width: 60%;
+            margin-top: 20px;
+            margin-left: 20%;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgb(255, 209, 142);
+            justify-content: center;
+            text-align: center;
+        }
+        .check{
+            font-size: 2rem;
+            color: greenyellow;
+        }
+        .passing{
+            color: greenyellow;
+        }
+        .failing{
+            color: red;
+        }
+</style>
+<body>
+    <div class="headerDiv">
+        <div class="scoreDiv">
+            <%if( (numberCorrect/results.length)>0.5 ){%>
+                <h1>You scored a: </h1>
+                <h1 class="passing"><%=`(${numberCorrect}/${results.length})`%></h1>
+            <%}%>
+            <%if( (numberCorrect/results.length)<0.5 ){%>
+                <h1>You scored a: </h1>
+                <h1 class="failing"><%=` (${numberCorrect}/${results.length})`%></h1>
+            <%}%>
+        </div>
+        <button class="anotherQuizBtn"><a href="/">Try Another Quiz?</a></button>
+    </div>
+        
+    
+    <%for(i=0;i<results.length;i++){%>
+    <div class="resultsDiv">
+        <h2>Question: <%=results[i].question%></h2>
+        <p>Your answer: <%=results[i].yourAnswer%></p>
+        <p>Correct answer: <%=results[i].correctAnswer%></p>
+        <%if(results[i].result === "Correct"){%>
+            <p class="check">&check;</p>
+        <%}%>
+        <%if(results[i].result === "Incorrect"){%>
+            <p class="cross">&#10060;</p>
+        <%}%>
+        <br>
+    </div>
+    <%}%>
+</body>
+</html>
